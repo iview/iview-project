@@ -1,0 +1,51 @@
+{
+  "name": "iview-project",
+  "version": "1.0.0",
+  "description": "A base project using Vue.js1.0、Vue-Router、webpack and with iView.",
+  "main": "index.js",
+  "scripts": {
+    "init": "webpack --progress --config webpack.dev.config.js",
+    "dev": "webpack-dev-server --inline --hot --compress --history-api-fallback --config webpack.dev.config.js",
+    "build": "webpack --progress --hide-modules --config webpack.prod.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iview/iview-project.git"
+  },
+  "author": "Aresn",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^1.0.26",
+    "vue-router": "^0.7.13",
+    "iview": "0.9.8-rc-1"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "^2.0.0",
+    "babel": "^6.3.13",
+    "babel-core": "^6.3.21",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-runtime": "^6.3.13",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-runtime": "^5.8.34",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "html-loader": "^0.3.0",
+    "html-webpack-plugin": "^2.22.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "node-sass": "^3.10.1",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "vue-hot-reload-api": "^1.2.0",
+    "vue-html-loader": "^1.2.0",
+    "vue-loader": "^7.2.0",
+    "vue-style-loader": "^1.0.0",
+    "webpack": "^1.13.1"
+  },
+  "bugs": {
+    "url": "https://github.com/iview/iview-project/issues"
+  },
+  "homepage": "https://www.iviewui.com"
+}
