@@ -1,6 +1,6 @@
 {
   "name": "iview-project",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A base project using Vue.js1.0、Vue-Router、webpack and with iView.",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   "dependencies": {
     "vue": "^1.0.26",
     "vue-router": "^0.7.13",
-    "iview": "0.9.8-rc-2"
+    "iview": "^0.9.8"
   },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",
