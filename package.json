@@ -17,7 +17,7 @@
   "dependencies": {
     "vue": "^1.0.26",
     "vue-router": "^0.7.13",
-    "iview": "^0.9.9"
+    "iview": "^0.9.10"
   },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",
