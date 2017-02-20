@@ -1,4 +1,6 @@
 # iView-project
+### 推荐直接使用 iView-cli
+[iView-cli](https://github.com/iview/iview-cli)
 > 源自[https://github.com/icarusion/vue-vueRouter-webpack](https://github.com/icarusion/vue-vueRouter-webpack)
 
 本工程适用于基于 Vue.js1.0 + vue-router + webpack + iView 的项目，已经将 iView 配置完成，只需要按步骤初始化即可。
