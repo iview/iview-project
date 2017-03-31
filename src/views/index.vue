@@ -14,8 +14,12 @@
         }
         h2{
             color: #666;
+            margin-bottom: 200px;
+            p{
+                margin: 0 0 50px;
+            }
         }
-        .ivu-row{
+        .ivu-row-flex{
             height: 100%;
         }
     }
@@ -23,17 +27,27 @@
 <template>
     <div class="index">
         <Row type="flex" justify="center" align="middle">
-            <i-col span="24">
+            <Col span="24">
                 <h1>
                     <img src="../images/logo.png">
                 </h1>
-                <h2>一套基于 Vue.js 的高质量UI组件库</h2>
-            </i-col>
+                <h2>
+                    <p>Welcome to your iView app!</p>
+                    <Button type="ghost" @click="handleStart">Start iView</Button>
+                </h2>
+            </Col>
         </Row>
     </div>
 </template>
 <script>
     export default {
-
+        methods: {
+            handleStart () {
+                this.$Modal.info({
+                    title: 'Bravo',
+                    content: 'Now, enjoy the convenience of iView.'
+                });
+            }
+        }
     }
 </script>

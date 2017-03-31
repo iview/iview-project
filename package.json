@@ -4,7 +4,8 @@
   "description": "A base project with Vue.js2、Vue-Router、webpack2 and with iView2.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --content-base ./ --inline --hot --compress --history-api-fallback --config webpack.dev.config.js",
+    "init": "webpack --progress --config webpack.dev.config.js",
+    "dev": "webpack-dev-server --content-base ./ --open --inline --hot --compress --history-api-fallback --config webpack.dev.config.js",
     "build": "webpack --progress --hide-modules --config webpack.prod.config.js"
   },
   "repository": {
