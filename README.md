@@ -10,11 +10,12 @@ npm install
 ## Run
 ### Development
 ```bush
+// For the first time, run init to create index.html
+npm run init
 npm run dev
 ```
 ### Production(Build)
 ```bush
 npm run build
 ```
-### View
-[http://127.0.0.1:8080](http://127.0.0.1:8080)
+
