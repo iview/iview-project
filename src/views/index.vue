@@ -43,6 +43,21 @@
     export default {
         methods: {
             handleStart () {
+
+                // 多条消息依次显示
+                let arr = [1, 2, 3, 4];
+                let vm = this;
+                (function next (len, curr) {
+                    if (curr < len) {
+                        vm.$Message.info({
+                            content: `第${arr[curr]}条信息`,
+                            onClose: _ => {
+                                next(len, curr + 1);
+                            }
+                        });
+                    }
+                })(arr.length, 0);
+                
                 this.$Modal.info({
                     title: 'Bravo',
                     content: 'Now, enjoy the convenience of iView.'
