@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",
+    "axios": "^0.16.2",
     "babel": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.2.4",
