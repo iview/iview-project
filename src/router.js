@@ -12,6 +12,13 @@ const routers = [
             title: ''
         },
         component: (resolve) => require(['./views/bus.vue'], resolve)
+    },
+    {
+        path: '/github',
+        meta: {
+            title: ''
+        },
+        component: (resolve) => require(['./views/github.vue'], resolve)
     }
 ];
 export default routers;
