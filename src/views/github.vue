@@ -48,6 +48,12 @@ export default {
                     }
                 },
                 {
+                    title: 'Emaiil',
+                    render: (h, params) => {
+                        return params.row.commit.author.email
+                    }
+                },
+                {
                     title: 'Date',
                     render: (h, params) => {
                         return params.row.commit.author.date
@@ -78,7 +84,6 @@ export default {
 .github {
     text-align: center;
     width: 800px;
-    margin: 0 auto;
-    margin-top: 100px;
+    margin: 100px auto;
 }
 </style>
