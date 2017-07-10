@@ -33,7 +33,7 @@
                 </h1>
                 <h2>
                     <p>Welcome to your iView app!</p>
-                    <Button type="ghost" @click="handleStart">Start iView</Button>
+                    <Button type="ghost" @click="handleStart" class="tilt">Start iView</Button>
                     <br>
                     <br>
                     <Button type="ghost" @click="handleRecursion">递归</Button>
@@ -45,12 +45,19 @@
     </div>
 </template>
 <script>
+    import VanillaTilt from 'vanilla-tilt';
     export default {
         data: function () {
             return {
                 arr: [1, 2, 3, 4], //消息数组
                 time: 1.5 // 每条消息显示多少秒
             }
+        },
+        mounted () {
+            VanillaTilt.init(document.querySelector(".tilt"), {
+        		max: 50,
+        		speed: 400
+        	});
         },
         methods: {
             handleStart () {
