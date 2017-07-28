@@ -4,6 +4,7 @@
             <Radio v-for="branch in branches" :label="branch.name" :key="branch.name"></Radio>
         </Radio-group>
         <Input-number :max="20" :min="1" v-model="size" size="small" @on-change="getCommits"></Input-number>
+        <Button type="primary" size="small" @click="handleCreatePdf">生成PDF</Button>
         <br>
         <br>
         <Table :columns="columns" :data="commits"></Table>
@@ -11,6 +12,12 @@
 </template>
 
 <script>
+
+import pdfMake from 'pdfmake/build/pdfmake.min.js'
+import pdfFonts from 'pdfmake/build/vfs_fonts.js'
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs
+
 export default {
     data: function () {
         return {
@@ -21,7 +28,6 @@ export default {
             columns: [
                 {
                     title: 'SHA',
-                    key: 'sha',
                     render: (h, params) => {
                         return h('a', {
                             attrs: {
@@ -75,6 +81,28 @@ export default {
             this.$http.get(commitURL).then(respose => {
                 this.commits = respose.data
             })
+        },
+        handleCreatePdf () {
+            let head = this.columns.map(col => col.title)
+            let body = this.commits.map(commit => {
+                let tmp = []
+                tmp.push(commit.sha.slice(0, 7))
+                tmp.push(commit.commit.message.split('\n').pop())
+                tmp.push(commit.commit.author.name)
+                tmp.push(commit.commit.author.email)
+                tmp.push(commit.commit.author.date)
+                return tmp
+            })
+            let docDefinition = {
+                content: [{
+                    layout: 'lightHorizontalLines',
+                    table: {
+                        headerRows: 1,
+                        body: [head, ...body]
+                    }
+                }]
+            }
+            pdfMake.createPdf(docDefinition).open()
         }
     }
 }
