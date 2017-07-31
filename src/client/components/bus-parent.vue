@@ -1,5 +1,7 @@
 <template lang="html">
-    <div>{{ number }}</div>
+    <div>
+        {{ number }}
+    </div>
 </template>
 
 <script>

@@ -3,9 +3,7 @@
 .DS_Store
 node_modules/
 .project
-dist
-dist/*
-src/config/*.tmp
-src/config/env.js
-/index.html
-/index_prod.html
+src/server/public/
+src/server/public/*
+src/client/config/*.tmp
+src/client/config/env.js

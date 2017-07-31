@@ -1,18 +1,19 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.base.config.js');
 const fs = require('fs');
 
-fs.open('./src/config/env.js', 'w', function (err, fd) {
+fs.open('./src/client/config/env.js', 'w', function (err, fd) {
     const buf = 'export default "production";';
     fs.write(fd, buf, 0, buf.length, 0, function (err, written, buffer){});
 });
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: '/dist/',
+        publicPath: '/',
         filename: '[name].[hash].js',
         chunkFilename: '[name].[hash].chunk.js'
     },
@@ -36,9 +37,10 @@ module.exports = merge(webpackBaseConfig, {
             }
         }),
         new HtmlWebpackPlugin({
-            filename: '../index_prod.html',
-            template: './src/template/index.ejs',
+            filename: '../views/index.ejs',
+            template: './src/client/template/index.ejs',
             inject: false
-        })
+        }),
+        new CleanWebpackPlugin('src/server/public')
     ]
 });
