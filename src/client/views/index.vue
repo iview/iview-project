@@ -32,7 +32,7 @@
                     <img src="../images/logo.png">
                 </h1>
                 <h2>
-                    <p>Welcome to your iView app!</p>
+                    <p>{{ slogan }}</p>
                     <Button type="ghost" @click="handleStart" class="tilt">Start iView</Button>
                     <br>
                     <br>
@@ -50,7 +50,8 @@
         data: function () {
             return {
                 arr: [1, 2, 3, 4], //消息数组
-                time: 1.5 // 每条消息显示多少秒
+                time: 1.5, // 每条消息显示多少秒
+                slogan: ''
             }
         },
         mounted () {
@@ -58,6 +59,9 @@
         		max: 50,
         		speed: 400
         	});
+            this.$http.get('/ajax/get-slogan').then(res => {
+                this.slogan = res.data.slogan
+            })
         },
         methods: {
             handleStart () {
