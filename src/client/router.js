@@ -20,5 +20,5 @@ const routers = [
         },
         component: (resolve) => require(['./views/github.vue'], resolve)
     }
-];
-export default routers;
+]
+export default routers

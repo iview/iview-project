@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import busChild from '../components/bus-child';
-import busParent from '../components/bus-parent';
+import busChild from '../components/bus-child'
+import busParent from '../components/bus-parent'
 
 export default {
     components: {

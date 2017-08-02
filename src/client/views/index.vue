@@ -45,20 +45,22 @@
     </div>
 </template>
 <script>
-    import VanillaTilt from 'vanilla-tilt';
+    import VanillaTilt from 'vanilla-tilt'
     export default {
         data: function () {
             return {
-                arr: [1, 2, 3, 4], //消息数组
+                arr: [1, 2, 3, 4], // 消息数组
                 time: 1.5, // 每条消息显示多少秒
-                slogan: ''
+                slogan: '' // 欢迎语
             }
         },
         mounted () {
-            VanillaTilt.init(document.querySelector(".tilt"), {
-        		max: 50,
-        		speed: 400
-        	});
+            // 3D翻转效果
+            VanillaTilt.init(document.querySelector('.tilt'), {
+                max: 50,
+                speed: 400
+            })
+            // 获取首页欢迎语
             this.$http.get('/ajax/get-slogan').then(res => {
                 this.slogan = res.data.slogan
             })
@@ -68,21 +70,21 @@
                 this.$Modal.info({
                     title: 'Bravo',
                     content: 'Now, enjoy the convenience of iView.'
-                });
+                })
             },
             handleRecursion () {
-                let vm = this;
-                (function next (len, curr) {
+                let vm = this
+                ;(function next (len, curr) {
                     if (curr < len) {
                         vm.$Message.info({
                             content: `第${vm.arr[curr]}条消息`,
                             duration: vm.time,
                             onClose: _ => {
-                                next(len, curr + 1);
+                                next(len, curr + 1)
                             }
-                        });
+                        })
                     }
-                })(vm.arr.length, 0);
+                })(vm.arr.length, 0)
             },
             handlePromise () {
                 let vm = this
@@ -91,25 +93,25 @@
                         vm.$Message.info({
                             content: `第${curr}条消息`,
                             duration: vm.time
-                        });
+                        })
                         setTimeout(() => {
-                            return resolve();
-                        }, vm.time * 1000);
+                            return resolve()
+                        }, vm.time * 1000)
                     })
                 })
             },
             async handleAwait () {
-                let vm = this;
+                let vm = this
                 for (let i = 0; i < vm.arr.length; i++) {
-                    let number = vm.arr[i];
+                    let number = vm.arr[i]
                     await new Promise((resolve, reject) => {
                         vm.$Message.info({
                             content: `第${number}条消息`,
                             duration: vm.time
-                        });
+                        })
                         setTimeout(() => {
-                            return resolve();
-                        }, vm.time * 1000);
+                            return resolve()
+                        }, vm.time * 1000)
                     })
                 }
             },

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import bus from '../libs/bus.js';
+import bus from '../libs/bus.js'
 
 export default {
     data: function () {
@@ -15,7 +15,7 @@ export default {
     },
     created () {
         bus.$on('change-number', num => {
-            this.number = num;
+            this.number = num
         })
     }
 }

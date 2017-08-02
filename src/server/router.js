@@ -13,6 +13,13 @@ router.get('/ajax/get-slogan', function(req, res, next) {
     })
 })
 
+router.get('/ajax/get-vercode', function(req, res, next) {
+    res.json({
+        vercode: ~~(Math.random() * 1000000),
+        times: 10
+    })
+})
+
 router.get('*', function(req, res, next) {
     res.render('index')
 })

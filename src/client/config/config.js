@@ -1,6 +1,6 @@
-import Env from './env';
+import Env from './env'
 
 let config = {
     env: Env
-};
-export default config;
+}
+export default config

@@ -1,4 +1,4 @@
-import Vue from 'vue';
-let bus = new Vue();
+import Vue from 'vue'
+let bus = new Vue()
 
-export default bus;
+export default bus

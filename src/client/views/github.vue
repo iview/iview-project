@@ -5,6 +5,7 @@
         </Radio-group>
         <Input-number :max="20" :min="1" v-model="size" size="small" @on-change="getCommits"></Input-number>
         <Button type="primary" size="small" @click="handleCreatePdf">生成PDF</Button>
+        <Button type="primary" size="small" @click="handleVerCode" :disabled="!!second">{{ btnText }}</Button>
         <br>
         <br>
         <Table :columns="columns" :data="commits"></Table>
@@ -12,7 +13,6 @@
 </template>
 
 <script>
-
 import pdfMake from 'pdfmake/build/pdfmake.min.js'
 import pdfFonts from 'pdfmake/build/vfs_fonts.js'
 
@@ -24,6 +24,7 @@ export default {
             branches: [],
             commits: [],
             size: 3,
+            second: 0,
             currentBranch: 'master',
             columns: [
                 {
@@ -75,6 +76,11 @@ export default {
             this.getCommits()
         })
     },
+    computed: {
+        btnText () {
+            return this.second ? this.second + 's后重新获取' : '获取验证码'
+        }
+    },
     methods: {
         getCommits () {
             let commitURL = `https://api.github.com/repos/gcvin/iview-project/commits?per_page=${this.size}&sha=${this.currentBranch}`
@@ -102,7 +108,23 @@ export default {
                     }
                 }]
             }
+
             pdfMake.createPdf(docDefinition).open()
+        },
+        handleVerCode () {
+            this.$http.get('/ajax/get-vercode').then(res => {
+                this.$Message.info('验证码：' + res.data.vercode)
+
+                let timesRun = res.data.times
+                this.second = timesRun
+                let interval = setInterval(_ => {
+                    timesRun -= 1
+                    this.second = timesRun
+                    if (timesRun === 0) {
+                        clearInterval(interval)
+                    }
+                }, 1000)
+            })
         }
     }
 }
