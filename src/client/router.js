@@ -19,6 +19,13 @@ const routers = [
             title: ''
         },
         component: (resolve) => require(['./views/github.vue'], resolve)
+    },
+    {
+        path: '/mongo',
+        meta: {
+            title: ''
+        },
+        component: (resolve) => require(['./views/mongo.vue'], resolve)
     }
 ]
 export default routers
