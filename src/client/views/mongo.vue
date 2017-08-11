@@ -13,7 +13,7 @@
                     <Input v-model="editUser.userAddr" placeholder="请输入地址"></Input>
                 </Form-item>
                 <Form-item label="年龄" prop="userAge">
-                    <Input v-model="editUser.userAge" placeholder="请输入年龄"></Input>
+                    <Input v-model.number="editUser.userAge" placeholder="请输入年龄"></Input>
                 </Form-item>
                 <Form-item label="登录时间">
                     <Date-picker v-model="editUser.loginDate" type="datetime" placeholder="选择日期和时间"></Date-picker>
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
     data () {
         return {
@@ -42,7 +44,7 @@ export default {
                 },
                 {
                     title: '登录时间',
-                    key: 'loginDate'
+                    render: (h, params) => moment(params.row.loginDate).format('YYYY-MM-DD HH:mm:ss')
                 },
                 {
                     title: '操作',
@@ -86,18 +88,9 @@ export default {
                 userAddr: [
                     { required: true, message: '地址不能为空', trigger: 'blur' }
                 ],
-                userAge: [{
-                    validator (rule, value, callback) {
-                        if (!value) {
-                            callback(new Error('年龄不能为空'))
-                        } else if (!Number.parseInt(value)) {
-                            callback(new Error('请输入大于零的整数'))
-                        } else {
-                            callback()
-                        }
-                    },
-                    trigger: 'blur'
-                }]
+                userAge: [
+                    { required: true, type: 'number', message: '年龄格式不正确', trigger: 'blur' }
+                ]
             },
             showEdit: false,
             editUser: {}
