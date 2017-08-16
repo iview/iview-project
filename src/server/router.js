@@ -49,6 +49,15 @@ router.post('/user/edit-user', function (req, res, next) {
     })
 })
 
+router.post('/user/add-user', function (req, res, next) {
+    let user = new User(req.body)
+    user.save().then(users => {
+        res.json(success)
+    }).catch(err => {
+        console.log('Error:' + err)
+    })
+})
+
 router.get('*', function (req, res, next) {
     res.render('index')
 })

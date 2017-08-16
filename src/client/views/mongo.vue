@@ -1,8 +1,11 @@
 <template lang="html">
     <div class="mongo">
+        <Button type="primary" @click="handleAdd">添加用户</Button>
+        <br />
+        <br />
         <Table :columns="columns" :data="users"></Table>
         <Modal
-            v-model="showEdit"
+            v-model="showModal"
             title="编辑用户"
             @on-ok="handleEditSave">
             <Form ref="editUser" :model="editUser" :rules="rules" :label-width="80">
@@ -92,8 +95,9 @@ export default {
                     { required: true, type: 'number', message: '年龄格式不正确', trigger: 'blur' }
                 ]
             },
-            showEdit: false,
-            editUser: {}
+            showModal: false,
+            editUser: {},
+            isAdd: false
         }
     },
     created () {
@@ -106,28 +110,42 @@ export default {
             })
         },
         handleEdit (user) {
+            this.isAdd = false
             this.editUser = Object.assign({}, user)
-            this.showEdit = true
+            this.showModal = true
+        },
+        handleAdd () {
+            this.isAdd = true
+            this.editUser = {}
+            this.showModal = true
         },
         handleRemove (id) {
-            this.$http.post('/user/remove-user', { id }).then(res => {
-                if (res.data.success) {
-                    this.$Message.success('删除成功!')
-                    this.getUsers()
-                } else {
-                    this.$Message.error('删除失败！')
+            this.$Modal.confirm({
+                title: '确认删除',
+                content: '确认删除该用户的信息？',
+                onOk: () => {
+                    this.$http.post('/user/remove-user', { id }).then(res => {
+                        if (res.data.success) {
+                            this.$Message.success('删除成功!')
+                            this.getUsers()
+                        } else {
+                            this.$Message.error('删除失败！')
+                        }
+                    })
                 }
             })
         },
         handleEditSave () {
             this.$refs['editUser'].validate((valid) => {
                 if (valid) {
-                    this.$http.post('/user/edit-user', this.editUser).then(res => {
+                    let url = this.isAdd ? '/user/add-user' : '/user/edit-user'
+                    let message = this.isAdd ? '添加' : '编辑'
+                    this.$http.post(url, this.editUser).then(res => {
                         if (res.data.success) {
-                            this.$Message.success('编辑成功!')
+                            this.$Message.success(message + '成功!')
                             this.getUsers()
                         } else {
-                            this.$Message.error('编辑失败！')
+                            this.$Message.error(message + '失败！')
                         }
                     })
                 } else {
