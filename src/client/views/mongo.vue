@@ -114,14 +114,13 @@ export default {
         },
         handleEdit (user) {
             this.isAdd = false
+            user.loginDate = new Date(user.loginDate)
             this.editUser = Object.assign({}, user)
-            this.editUser.loginDate = new Date(user.loginDate)
             this.showModal = true
         },
         handleAdd () {
             this.isAdd = true
             this.editUser = {}
-            this.editUser.loginDate = new Date()
             this.showModal = true
         },
         handleRemove (id) {
