@@ -18,7 +18,7 @@
                 <Form-item label="年龄" prop="userAge">
                     <Input v-model.number="editUser.userAge" placeholder="请输入年龄"></Input>
                 </Form-item>
-                <Form-item label="登录时间">
+                <Form-item label="登录时间" prop="loginDate">
                     <Date-picker v-model="editUser.loginDate" type="datetime" placeholder="选择日期和时间"></Date-picker>
                 </Form-item>
             </Form>
@@ -93,6 +93,9 @@ export default {
                 ],
                 userAge: [
                     { required: true, type: 'number', message: '年龄格式不正确', trigger: 'blur' }
+                ],
+                loginDate: [
+                    { required: true, type: 'date', message: '请选择日期', trigger: 'change' }
                 ]
             },
             showModal: false,
@@ -112,11 +115,13 @@ export default {
         handleEdit (user) {
             this.isAdd = false
             this.editUser = Object.assign({}, user)
+            this.editUser.loginDate = new Date(user.loginDate)
             this.showModal = true
         },
         handleAdd () {
             this.isAdd = true
             this.editUser = {}
+            this.editUser.loginDate = new Date()
             this.showModal = true
         },
         handleRemove (id) {
