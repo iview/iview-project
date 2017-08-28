@@ -4,6 +4,7 @@
         <br />
         <br />
         <Table :columns="columns" :data="users"></Table>
+        <Page url="?page=#num#" :current="page" :size="10" :total="101" :number="5"></Page>
         <Modal
             v-model="showModal"
             title="编辑用户"
@@ -28,6 +29,8 @@
 
 <script>
 import moment from 'moment'
+import Page from '../components/page'
+import util from '../libs/util'
 
 export default {
     data () {
@@ -103,6 +106,14 @@ export default {
             isAdd: false
         }
     },
+    components: {
+        Page
+    },
+    computed: {
+        page () {
+            return Number(util.getQueryString('page'))
+        }
+    },
     created () {
         this.getUsers()
     },
@@ -165,5 +176,8 @@ export default {
 .mongo {
     width: 800px;
     margin: 100px auto;
+}
+.page {
+    margin-top: 20px;
 }
 </style>
