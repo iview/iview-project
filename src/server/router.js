@@ -1,7 +1,17 @@
 import express from 'express'
+import ccap from 'ccap'
 import User from './schema/user.js'
 
 const router = express.Router()
+const captcha = ccap({
+    width: 200,
+    height: 40,
+    offset: 34,
+    quality: 100,
+    fontsize: 34
+})
+
+let ccapAry = []
 
 let success = {
     success: true
@@ -56,6 +66,16 @@ router.post('/user/add-user', function (req, res, next) {
     }).catch(err => {
         console.log('Error:' + err)
     })
+})
+
+router.get('/ajax/get-imgcode', function (req, res, next) {
+    ccapAry = captcha.get()
+    console.log(ccapAry[0])
+    res.end(ccapAry[1])
+})
+
+router.post('/ajax/ver-imgcode', function (req, res, next) {
+    res.end(req.body.value.toLowerCase() === ccapAry[0].toLowerCase() ? '验证成功' : '验证失败')
 })
 
 router.get('*', function (req, res, next) {

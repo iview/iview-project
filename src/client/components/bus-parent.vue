@@ -1,6 +1,7 @@
 <template lang="html">
     <div>
-        {{ number }}
+        {{ value }}
+        <Button @click="handleClick">验证</Button>
     </div>
 </template>
 
@@ -10,13 +11,22 @@ import bus from '../libs/bus.js'
 export default {
     data: function () {
         return {
-            number: 0
+            value: ''
         }
     },
     created () {
-        bus.$on('change-number', num => {
-            this.number = num
+        bus.$on('change-value', value => {
+            this.value = value
         })
+    },
+    methods: {
+        handleClick () {
+            this.$http.post('/ajax/ver-imgcode', {
+                value: this.value
+            }).then(res => {
+                this.$Message.info(res.data)
+            })
+        }
     }
 }
 </script>

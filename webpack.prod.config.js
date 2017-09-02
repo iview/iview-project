@@ -41,6 +41,10 @@ module.exports = merge(webpackBaseConfig, {
             template: './src/client/template/index.ejs',
             inject: false
         }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        }),
         new CleanWebpackPlugin('src/server/public')
     ]
 });

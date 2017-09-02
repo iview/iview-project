@@ -2,10 +2,12 @@
     <div class="bus">
         <bus-parent :class="[{ active: isActive }, bold]"></bus-parent>
         <bus-child class="arrow"></bus-child>
+        <img :src="imgurl" alt="图形验证码" @click="changeImage()">
     </div>
 </template>
 
 <script>
+/* eslint no-undef: "off" */
 import busChild from '../components/bus-child'
 import busParent from '../components/bus-parent'
 
@@ -13,12 +15,23 @@ export default {
     data () {
         return {
             isActive: true,
-            bold: 'bold'
+            bold: 'bold',
+            refresh: 0
+        }
+    },
+    computed: {
+        imgurl () {
+            return '/ajax/get-imgcode?' + this.refresh
         }
     },
     components: {
         busChild,
         busParent
+    },
+    methods: {
+        changeImage (e) {
+            this.refresh++
+        }
     }
 }
 </script>
