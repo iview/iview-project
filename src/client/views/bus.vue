@@ -2,7 +2,7 @@
     <div class="bus">
         <bus-parent :class="[{ active: isActive }, bold]"></bus-parent>
         <bus-child class="arrow"></bus-child>
-        <img :src="imgurl" alt="图形验证码" @click="changeImage()">
+        <div id="captcha" @click="getCaptcha"></div>
     </div>
 </template>
 
@@ -15,22 +15,21 @@ export default {
     data () {
         return {
             isActive: true,
-            bold: 'bold',
-            refresh: 0
+            bold: 'bold'
         }
     },
-    computed: {
-        imgurl () {
-            return '/ajax/get-imgcode?' + this.refresh
-        }
+    created () {
+        this.getCaptcha()
     },
     components: {
         busChild,
         busParent
     },
     methods: {
-        changeImage (e) {
-            this.refresh++
+        getCaptcha () {
+            this.$http.get('/ajax/get-captcha').then(res => {
+                $('#captcha').html(res.data)
+            })
         }
     }
 }

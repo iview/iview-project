@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         handleClick () {
-            this.$http.post('/ajax/ver-imgcode', {
+            this.$http.post('/ajax/ver-captcha', {
                 value: this.value
             }).then(res => {
                 this.$Message.info(res.data)

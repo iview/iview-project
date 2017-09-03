@@ -1,17 +1,9 @@
 import express from 'express'
-import ccap from 'ccap'
+// import ccap from 'ccap'
+import svgCaptcha from 'svg-captcha'
 import User from './schema/user.js'
 
 const router = express.Router()
-const captcha = ccap({
-    width: 200,
-    height: 40,
-    offset: 34,
-    quality: 100,
-    fontsize: 34
-})
-
-let ccapAry = []
 
 let success = {
     success: true
@@ -68,14 +60,23 @@ router.post('/user/add-user', function (req, res, next) {
     })
 })
 
-router.get('/ajax/get-imgcode', function (req, res, next) {
-    ccapAry = captcha.get()
-    console.log(ccapAry[0])
-    res.end(ccapAry[1])
+router.get('/ajax/get-captcha', function (req, res, next) {
+    let captcha = svgCaptcha.create({
+        size: 4,
+        width: 200,
+        height: 40,
+        ignoreChars: '0o1i',
+        noise: 1,
+        color: true,
+        background: '#cc9966'
+    })
+    req.session.captcha = captcha.text
+    res.send(captcha.data)
 })
 
-router.post('/ajax/ver-imgcode', function (req, res, next) {
-    res.end(req.body.value.toLowerCase() === ccapAry[0].toLowerCase() ? '验证成功' : '验证失败')
+router.post('/ajax/ver-captcha', function (req, res, next) {
+    let isVer = req.body.value.toLowerCase() === req.session.captcha.toLowerCase()
+    res.send(isVer ? '验证成功' : '验证失败')
 })
 
 router.get('*', function (req, res, next) {
