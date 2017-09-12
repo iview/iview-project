@@ -1,6 +1,6 @@
 {
   "name": "iview-project",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A base project with Vue.js2、Vue-Router、webpack2 and with iView2.",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "file-loader": "^0.8.5",
     "html-loader": "^0.3.0",
     "html-webpack-plugin": "^2.28.0",
+    "iview-loader": "^1.0.0-beta.3",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
