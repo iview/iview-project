@@ -1,5 +1,5 @@
 <style scoped>
-    @import '../styles/common.css';
+    @import 'styles/common.css';
 </style>
 <template>
     <div>
@@ -11,7 +11,7 @@
         data () {
             return {}
         },
-        ready () {
+        mounted () {
 
         },
         beforeDestroy () {
